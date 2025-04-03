@@ -1,0 +1,11 @@
+from pyspark import SparkConf,SparkContext
+conf=SparkConf().setMaster("local").setAppName("aa")
+sc=SparkContext(conf=conf)
+rdd1=sc.textFile("file:///home/hadoop/data2.txt").flatMap(lambda x: x.split()).map(lambda x: (x,1)).reduceByKey(lambda x,y: x+y)
+# rdd2=rdd1.map(lambda x:x.split())
+# rdd3=rdd1.flatMap(lambda x:x.split())
+# rdd4=rdd3.map(lambda x:(x,1))
+# rdd5=rdd4.reduceByKey(lambda x,y:x+y)
+# rdd5.foreach(print)
+rdd1.foreach(print)
+sc.stop()
